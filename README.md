@@ -1,34 +1,33 @@
-# Caption Lab — Hindi / Hinglish / English
+# Auto Caption Lab — Hindi / Hinglish / English
 
-A plain-local Expo Android app prototype for personal, unlimited caption editing.
+A plain-local Expo web/mobile prototype that generates timed captions using Whisper AI in the browser.
 
-## Included in this version
+## Automatic caption flow
 
-- Import a local video from the Android gallery.
-- Preview the selected video inside the app.
-- Hindi, Hinglish, and English language chips.
-- Editable caption lines with start/end time fields.
-- Add unlimited caption lines.
-- Four starting styles: Cinematic, Neon Pop, Clean, and Karaoke.
-- Live word-highlight toggle.
-- Color swatches, size preview, font/weight/corner/background details.
-- No login, account, watermark, subscription, or cloud API in the editor.
+1. Open the live site.
+2. Choose an MP4, MOV, WEBM, or audio file.
+3. Select Hindi, Hinglish, or English.
+4. Tap **Generate automatic captions**.
+5. The browser decodes the audio and runs `Xenova/whisper-tiny` locally through Transformers.js.
+6. Timed caption lines appear and can be edited.
 
-## Run on a realme Android phone
+The first generation downloads the speech model from the public model CDN. The browser caches it for later use. Video/audio stays in the browser and is not sent to a project server.
 
-1. Install **Expo Go** from the Play Store.
-2. Connect the phone and computer to the same Wi‑Fi network.
-3. From this folder run:
+## Live site
 
-   ```bash
-   npm install
-   npx expo start
-   ```
+https://toxicchai.github.io/hindi-caption-studio/
 
-4. Scan the QR code in Expo Go.
+## Current capabilities
 
-For a standalone Android build, use a local Android Studio/SDK setup and run `npm run android`, or generate an APK with the Expo/EAS Android build workflow later.
+- Automatic speech-to-text caption generation.
+- Hindi, Hinglish, and English language selection.
+- Timestamped caption chunks.
+- Editable generated caption text and timing.
+- Live word highlighting preview.
+- Karaoke, Neon Pop, Clean, and Cinematic styles.
+- Color, size, weight, and rounded-background controls.
+- No account, watermark, subscription, or server-side usage limit.
 
-## Important scope note
+## Practical device note
 
-The editor is fully local and unlimited. High-quality automatic Hindi/Hinglish speech-to-text and MP4 rendering require a native on-device transcription/rendering layer (for example, a bundled Whisper model plus FFmpeg). Those are deliberately kept separate from this first UI so the app stays lightweight and does not send private videos to a server. The current app ships with editable demo captions and the video import/preview foundation for that next native module.
+The browser model is intentionally free and local, but the first model download is large and transcription speed depends on the phone. Newer Android phones will work better. A production Android APK can later bundle a native Whisper model and FFmpeg export for faster offline processing and burned-in MP4 export.
